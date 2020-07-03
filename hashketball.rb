@@ -127,3 +127,93 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player_name)
+  game_hash.each do |key1, value1|
+    value1[:players].each do |key2, value2|
+      if key2[:player_name] == player_name
+        return key2[:points]
+      end  
+    end  
+  end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |key1, value1|
+    #puts value1
+    value1[:players].each do |key2, value2|
+      #puts key2[:player_name]
+      if key2[:player_name] == player_name
+        return key2[:shoe]
+      end  
+    end  
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |key1, value1|
+    #puts value1[:team_name]
+    #puts value1[:colors]
+    if value1[:team_name] == team_name
+      return value1[:colors]
+    end
+  end
+end
+
+def team_names
+  team_names = []
+  game_hash.each do |key1, value1|
+    #puts value1[:team_name]
+    team_names.push(value1[:team_name])
+  end
+  return team_names
+end
+
+def player_numbers(team_name)
+  player_numbers = []
+  game_hash.each do |key1, value1|
+    if value1[:team_name] == team_name
+      value1[:players].each do |key2, value2|
+        player_numbers.push(key2[:number]) 
+      end
+    end  
+  end
+  return player_numbers
+end
+
+def player_stats(player)
+  game_hash.each do |key1, value1|
+    value1[:players].each do |key2, value2|
+      if key2[:player_name] == player
+        return key2
+      end  
+    end  
+  end  
+end
+
+def big_shoe_rebounds
+  biggest_shoe_size = 0
+  game_hash.each do |key1, value1|
+    value1[:players].each do |key2, value2|
+      if key2[:shoe] > biggest_shoe_size
+        biggest_shoe_size =  key2[:shoe]
+      end  
+    end  
+  end  
+  #puts biggest_shoe_size
+  game_hash.each do |key1, value1|
+    value1[:players].each do |key2, value2|
+      if key2[:shoe] == biggest_shoe_size
+        return key2[:rebounds]
+      end  
+    end  
+  end
+end
+
+
+#num_points_scored(player_name)
+#shoe_size(player_name)
+#team_colors("Brooklyn Nets")
+#team_names
+#player_numbers("Brooklyn Nets")
+#player_stats("Alan Anderson")
+#big_shoe_rebounds
