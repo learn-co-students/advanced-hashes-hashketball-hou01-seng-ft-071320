@@ -127,3 +127,93 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player_name)
+  #player could be home or away
+  game_hash.each do |parent_key,parent_hash|
+    #parent key is home or away 
+    #parent value is statistics within the home and away keys
+    game_hash[parent_key][:players].each do |player_hash|
+      if player_name == player_hash[:player_name]
+        return player_hash[:points]
+      end
+    end
+  end
+  return nil
+end
+
+def shoe_size(player_name)
+  #player could be home or away
+  game_hash.each do |parent_key,parent_hash|
+    #parent key is home or away 
+    #parent value is statistics within the home and away keys
+    game_hash[parent_key][:players].each do |player_hash|
+      if player_name == player_hash[:player_name]
+        return player_hash[:shoe]
+      end
+    end
+  end
+  return nil
+end
+
+def team_colors(team_name)
+  game_hash.each do |parent_key,team_hash|
+    if team_name == team_hash[:team_name]
+      return team_hash[:colors]
+    end
+  end
+  return nil
+end
+
+def team_names
+  return [
+    game_hash[:home][:team_name],
+    game_hash[:away][:team_name]
+    ]
+end
+
+def player_numbers(team_name)
+  game_hash.each do |game_key,team_hash|
+    if team_name == team_hash[:team_name]
+      numbers = []
+      team_hash[:players].each do |player_jersey_number|
+        numbers.push(player_jersey_number[:number])
+      end
+      return numbers
+    end
+  end
+  return nil
+end
+
+def player_stats(player_name)
+  game_hash.each do |parent_key,parent_hash|
+    #parent key is home or away 
+    #parent value is statistics within the home and away keys
+    game_hash[parent_key][:players].each do |player_hash|
+      if player_name == player_hash[:player_name]
+        return player_hash
+      end
+    end
+  end
+  return nil
+end
+
+def big_shoe_rebounds
+  largest_shoe_size = 0
+  player_stats = nil
+  game_hash.each do |parent_key,parent_hash|
+    parent_hash[:players].each do |player_data|
+      if largest_shoe_size == 0 && !player_stats
+        largest_shoe_size = player_data[:shoe]
+        player_stats = player_data
+      else
+        if player_data[:shoe] > largest_shoe_size
+          largest_shoe_size = player_data[:shoe]
+          player_stats = player_data
+        end
+      end
+    end
+  end
+  
+  return player_stats[:rebounds]
+end
