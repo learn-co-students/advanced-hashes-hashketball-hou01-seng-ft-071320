@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -127,3 +129,95 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player_name)
+  current_player_score = nil
+  game_hash.each do |k,v|
+    i = 0
+    while i < game_hash[k][:players].length
+      if game_hash[k][:players][i][:player_name] == player_name
+         current_player_score =  game_hash[k][:players][i][:points]
+      end
+      i += 1
+    end
+  end
+  current_player_score
+end
+
+def shoe_size(player_name)
+  current_player_shoe = nil
+  game_hash.each do |k,v|
+    i = 0
+    while i < game_hash[k][:players].length
+      if game_hash[k][:players][i][:player_name] == player_name
+         current_player_shoe =  game_hash[k][:players][i][:shoe]
+      end
+      i += 1
+    end
+  end
+  current_player_shoe
+end
+
+def team_colors(team_name)
+  selected_team_color = nil
+  game_hash.each do |k,v|
+    if game_hash[k][:team_name] == team_name
+      selected_team_color = game_hash[k][:colors]
+    end
+  end  
+  selected_team_color
+end
+
+def team_names
+  teams = []
+  game_hash.each do |k,v|
+    teams.push(game_hash[k][:team_name])
+  end
+teams
+end
+
+def player_numbers(team_name)
+  team_numbers = []
+  game_hash.each do |k,v|
+    i = 0
+    while i < game_hash[k][:players].length
+      if game_hash[k][:team_name] == team_name
+        team_numbers.push(game_hash[k][:players][i][:number])
+      end
+      i += 1
+    end    
+  end
+ team_numbers
+end
+
+def player_stats(player_name)
+  current_player_stats = nil
+  game_hash.each do |k,v|
+    i = 0
+    while i < game_hash[k][:players].length
+      if game_hash[k][:players][i][:player_name] == player_name
+         current_player_stats =  game_hash[k][:players][i]
+      end
+      i += 1
+    end
+  end
+  current_player_stats
+end
+
+def big_shoe_rebounds
+  largest_shoe = 0
+  largest_shoe_holder = nil
+  largest_shoe_holder_rebounds = 0
+  game_hash.each do |k,v|
+    i = 0
+    while i < game_hash[k][:players].length
+      if game_hash[k][:players][i][:shoe] > largest_shoe
+        largest_shoe = game_hash[k][:players][i][:shoe]
+        largest_shoe_holder = game_hash[k][:players][i][:player_name]
+        largest_shoe_holder_rebounds = game_hash[k][:players][i][:rebounds]
+      end
+    i += 1
+    end
+  end
+  largest_shoe_holder_rebounds
+end
