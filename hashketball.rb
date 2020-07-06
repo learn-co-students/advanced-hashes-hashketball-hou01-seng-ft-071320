@@ -1,4 +1,4 @@
-# Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -127,3 +127,108 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(player_name)
+  the_hash = game_hash()
+  all_players = the_hash[:home][:players].concat(the_hash[:away][:players])
+  found_player_index = all_players.find_index do |player|
+    player[:player_name] == player_name
+  end 
+  all_players[found_player_index][:points] 
+end
+
+def shoe_size(player_name)
+  the_hash = game_hash()
+  all_players = the_hash[:home][:players].concat(the_hash[:away][:players])
+  found_player_index = all_players.find_index do |player|
+    player[:player_name] == player_name
+  end 
+  all_players[found_player_index][:shoe]
+end
+
+def team_colors(team_name)
+  the_hash = game_hash()
+  if the_hash[:home][:team_name] == team_name
+     the_hash[:home][:colors]
+  else 
+     the_hash[:away][:colors]
+    
+  end
+end
+
+def team_names
+  the_hash = game_hash()
+  all_team_names = []
+  all_team_names << game_hash[:home][:team_name]
+  all_team_names << game_hash[:away][:team_name]
+  all_team_names
+  #returns an array of the team names 
+  
+end
+
+def player_numbers(team_name)
+  the_hash = game_hash()
+  if the_hash[:home][:team_name] == team_name
+    the_hash[:home][:players].map do |player|
+      player[:number]
+    end
+  else
+    the_hash[:away][:players].map do |player|
+      player[:number]
+    end
+  end
+
+end
+
+def player_stats(players_name)
+  the_hash = game_hash()
+  all_players = the_hash[:home][:players].concat(the_hash[:away][:players])
+  found_player_index = all_players.find_index do |player|
+    player[:player_name] == players_name
+  end 
+  all_players[found_player_index] 
+  
+  
+end
+
+
+def big_shoe_rebounds
+ the_hash = game_hash() 
+ all_players = the_hash[:home][:players].concat(the_hash[:away][:players])
+ all_players.sort_by! do |player|
+   player[:shoe]
+ end
+ player = all_players.length - 1 
+ rebounds = all_players[player][:rebounds]
+ rebounds
+  
+end
+
+def most_points_scored
+  
+  #returns the player that has the most points 
+  
+end
+
+def winning_team
+  
+  #returns team that has the most points
+  
+end
+
+def player_with_longest_name
+  
+  #returns player that has the longest names
+  
+end
+
+def long_name_steals_a_ton
+  
+  #returns true if the player with the longest name has the most steals
+  
+end
+
+  
+  
+  
+  
