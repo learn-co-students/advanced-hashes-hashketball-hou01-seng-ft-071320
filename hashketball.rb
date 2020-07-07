@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -127,3 +129,116 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player_name)
+  #binding.pry
+  game_hash.each do |location, team_data|
+    #binding.pry
+    team_data.each do |attribute, data|
+      if attribute == :players
+      #binding.pry
+      data.each do |data_item|
+        if data_item[:player_name] == player_name
+          return data_item[:points]
+         #binding.pry
+        end
+       end
+      end
+    end
+  end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |data_item|
+          if data_item[:player_name] == player_name
+            return data_item[:shoe]
+              end
+            end
+          end
+      end
+  end
+end
+
+def team_colors(team_name)
+  empty_array = []
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name
+        return team_data[:colors]
+      #binding.pry
+  end
+  end
+end
+
+def team_names
+  game_hash.map do |location, team_data|
+    team_data[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  #binding.pry
+  result = []
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name
+    #binding.pry
+    team_data.each do |attribute, data|
+      if attribute == :players
+        data.each do |k|
+         result << k[:number] 
+        #binding.pry
+      end
+  end
+      end
+    end
+  end
+  result
+end
+
+def player_stats(player_name)
+  #result = {}
+  game_hash.each do |location, team_data|
+    #binding.pry
+    team_data.each do |attribute, data|
+      #binding.pry
+      if attribute == :players
+        data.each do |k|
+          if k[:player_name] == player_name
+            return k
+          #binding.pry
+        end
+        end
+    end
+    end
+end
+end
+
+def big_shoe_rebounds
+  m_shoe = 0 
+  rebounds = 0
+  game_hash.each do |location, team_data|
+    #binding.pry
+    team_data.each do |attribute, data|
+      if attribute == :players
+        #binding.pry
+        data.each do |k, v|
+          if k[:shoe] > m_shoe
+          m_shoe = k[:shoe] 
+           rebounds = k[:rebounds]
+          #binding.pry
+        end
+      end
+      end
+  end
+  end
+  rebounds
+end
+
+
+
+
+
+
+
+
