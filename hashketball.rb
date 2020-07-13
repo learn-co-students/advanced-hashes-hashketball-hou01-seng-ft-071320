@@ -127,62 +127,57 @@ def game_hash
   }
 end
 
+def all_players
+  all_players = game_hash[:home][:players] + game_hash[:away][:players]
+end
 # Write code here
-def num_points_scored(basketball_player)
-  points = "Player not on Team"
-  game_hash.each do |key,value|
-    value[:players].each do |index|
-      if index[:player_name] == basketball_player
-        points = index[:points]
-      end
-    end
+def find_player(basketball_player)
+  all_players.find do |index| index[:player_name] == basketball_player
   end
-  points
+end
+
+def num_points_scored(basketball_player)
+  find_player(basketball_player)[:points]
 end
 
 def shoe_size(basketball_player)
-  shoe_size = "Player not on Team"
-  game_hash.each do |key,value|
-    value[:players].each do |index|
-      if index[:player_name] == basketball_player
-        shoe_size = index[:shoe]
-      end
-    end
-  end
-  shoe_size
+find_player(basketball_player)[:shoe]
 end
 
 def team_colors(team_name)
-  team_colors = "Team does not Exist"
+team_colors = "Team does not exist"
   game_hash.each do |key,value|
-    if value[:team_name] == team_name
+    if value[:team_name]==team_name
       team_colors = value[:colors]
     end
   end
   team_colors
+  #binding.pry
 end
 
 def team_names
-  names_of_teams = game_hash.each_with_object([]) do |(key,value),team_array|
-    team_array << value[:team_name]
-  end
-  names_of_teams
+  array_of_teams = game_hash.each_with_object([]) do |(key,value),team_array|
+      team_array << value[:team_name]
+    end
+  array_of_teams
+  #binding.pry
 end
 
 def player_numbers(team_name)
-  number_in_team = []
-  game_hash.each do |key,value|
+player_numbers = "Team does not exist"
+  player_numbers = game_hash.each_with_object([]) do |(key,value),number_array|
     if value[:team_name] == team_name
       value[:players].each do |index|
-        number_in_team << index[:number]
+        number_array << index[:number]
       end
     end
   end
-  number_in_team
+  player_numbers
+  #binding.pry
 end
 
 def player_stats(basketball_player)
-  stats = "Player not on Team"
+stats = "Player does not exist"
   game_hash.each do |key,value|
     value[:players].each do |index|
       if index[:player_name] == basketball_player
