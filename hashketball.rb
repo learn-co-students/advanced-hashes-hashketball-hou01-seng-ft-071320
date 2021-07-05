@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +127,78 @@ def game_hash
   }
 end
 
+def all_players
+  all_players = game_hash[:home][:players] + game_hash[:away][:players]
+end
 # Write code here
+def find_player(basketball_player)
+  all_players.find do |index| index[:player_name] == basketball_player
+  end
+end
+
+def num_points_scored(basketball_player)
+  find_player(basketball_player)[:points]
+end
+
+def shoe_size(basketball_player)
+find_player(basketball_player)[:shoe]
+end
+
+def team_colors(team_name)
+team_colors = "Team does not exist"
+  game_hash.each do |key,value|
+    if value[:team_name]==team_name
+      team_colors = value[:colors]
+    end
+  end
+  team_colors
+  #binding.pry
+end
+
+def team_names
+  array_of_teams = game_hash.each_with_object([]) do |(key,value),team_array|
+      team_array << value[:team_name]
+    end
+  array_of_teams
+  #binding.pry
+end
+
+def player_numbers(team_name)
+player_numbers = "Team does not exist"
+  player_numbers = game_hash.each_with_object([]) do |(key,value),number_array|
+    if value[:team_name] == team_name
+      value[:players].each do |index|
+        number_array << index[:number]
+      end
+    end
+  end
+  player_numbers
+  #binding.pry
+end
+
+def player_stats(basketball_player)
+stats = "Player does not exist"
+  game_hash.each do |key,value|
+    value[:players].each do |index|
+      if index[:player_name] == basketball_player
+        stats = index
+      end
+    end
+  end
+  stats
+end
+
+def big_shoe_rebounds
+  #returns the number of rebounds of the player with the biggest shoe size
+  shoe_size = 0
+  rebound = 0
+  game_hash.each do |key,value|
+    value[:players].each do |index|
+      if index[:shoe] > shoe_size
+        shoe_size = index[:shoe]
+        rebound = index[:rebounds]
+      end
+    end
+  end
+  rebound
+end
