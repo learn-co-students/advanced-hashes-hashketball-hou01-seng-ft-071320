@@ -1,4 +1,4 @@
-# Write your code below game_hash
+require "pry"
 def game_hash
   {
     home: {
@@ -126,4 +126,153 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name)
+library = game_hash
+  location=[]
+  teams=[]
+  library.each{|loc,team|
+      location.push(loc)
+      teams.push(team)
+  }
+
+teams.each { |index|
+    index[:players].each {|inner_index|
+        if (inner_index[:player_name] == player_name)
+            return inner_index[:points]
+        end
+}
+}
+end
+#####
+def shoe_size(player_name)
+library = game_hash
+  location=[]
+  teams=[]
+  library.each{|loc,team|
+      location.push(loc)
+      teams.push(team)
+  }
+
+teams.each { |index|
+    index[:players].each {|inner_index|
+        if (inner_index[:player_name] == player_name)
+            return inner_index[:shoe]
+        end
+}
+}
+end
+
+#####
+def team_colors(team_name)
+library = game_hash
+  location=[]
+  teams=[]
+  library.each{|loc,team|
+      location.push(loc)
+      teams.push(team)
+  }
+
+teams.each { |index|
+        if (index[:team_name] == team_name)
+            return index[:colors]
+        end
+}
+end
+
+#####
+def team_names
+library = game_hash
+  location=[]
+  teams=[]
+  library.each{|loc,team|
+      location.push(loc)
+      teams.push(team)
+  }
+team_name = [ ]
+teams.each { |index|
+  team_name.push(index[:team_name])
+}
+return team_name
+end
+
+#####
+def player_numbers(team_name)
+library = game_hash
+  location=[]
+  teams=[]
+  library.each{|loc,team|
+      location.push(loc)
+      teams.push(team)
+  }
+numbers = [ ]
+teams.each { |index|
+    index[:players].each {|inner_index|
+         if (index[:team_name] == team_name)
+          numbers.push(inner_index[:number])
+  end
+}
+}
+return numbers
+end
+####
+def num_points_scored(player_name)
+library = game_hash
+  location=[]
+  teams=[]
+  library.each{|loc,team|
+      location.push(loc)
+      teams.push(team)
+  }
+
+teams.each { |index|
+    index[:players].each {|inner_index|
+        if (inner_index[:player_name] == player_name)
+            return inner_index[:points]
+        end
+}
+}
+end
+#####
+
+def player_stats(player_name)
+library = game_hash
+  location=[]
+  teams=[]
+  library.each{|loc,team|
+      location.push(loc)
+      teams.push(team)
+  }
+
+teams.each { |index|
+    index[:players].each {|inner_index|
+        if (inner_index[:player_name] == player_name)
+            return inner_index
+        end
+}
+}
+end
+###
+def big_shoe_rebounds
+library = game_hash
+  location=[]
+  teams=[]
+  library.each{|loc,team|
+      location.push(loc)
+      teams.push(team)
+  }
+shoes = []
+teams.each { |index|
+  index[:players].each {|inner_index|
+        shoes.push (inner_index[:shoe])
+  }
+}
+teams.each { |index|
+  index[:players].each {|inner_index|
+         if (inner_index[:shoe]==shoes.max)
+            return inner_index[:rebounds]
+        end
+    }
+}
+end
+
+
